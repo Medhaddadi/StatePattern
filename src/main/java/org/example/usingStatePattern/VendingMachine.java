@@ -14,19 +14,25 @@ public class VendingMachine {
     }
 
     public void insertMoney() {
+        // we delegate the work to the current state
         currentState.insertMoney();
+        // if the current state is NoMoneyState, we set the state to HasMoneyState
         if (currentState instanceof HasMoneyState) {
             setState(new DispenseState());
         }
     }
 
     public void ejectMoney() {
+        // we delegate the work to the current state
         currentState.ejectMoney();
+        // if the current state is HasMoneyState, we set the state to NoMoneyState
         setState(new NoMoneyState());
     }
 
     public void dispense() {
+        // we delegate the work to the current state
         currentState.dispense();
+        // if the current state is DispenseState, we set the state to NoMoneyState
         setState(new NoMoneyState());
     }
 }
